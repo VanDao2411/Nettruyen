@@ -12,14 +12,14 @@ const Story_chapter = () => {
     const location = useLocation();
     const { slug } = useParams();
     const navigate = useNavigate();
-    const { chapterApiData, currentChapter, totalChapters, chapters } = location.state || {}; // Lấy dữ liệu từ state
+    const { chapterApiData, currentChapter, totalChapters, chapter, chapters, data } = location.state || {}; // Lấy dữ liệu từ state
     const [images, setImages] = useState([]);
     const [comicName, setComicName] = useState('');
     const [chapterName, setChapterName] = useState(''); // State để lưu tên truyện
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
-    const fetchImages = async () => {
+       
+    const fetchImages = async (chapterApiData) => {
         setLoading(true);
         setError(null);
         try {
@@ -53,33 +53,57 @@ const Story_chapter = () => {
 
     useEffect(() => {
         if (chapterApiData) {
-            fetchImages();
+            fetchImages(chapterApiData);
         }
-    }, [chapterApiData]);
+    }, [chapterApiData, chapter]);
 
       const findChapterData = (chapterNumber) => {
         return chapters.find(chapter => chapter.chapter_name === chapterNumber.toString());
     };
 
-    const handleNextChapter = () => {
-        if (currentChapter < totalChapters) {
-            const nextChapter = currentChapter + 1;
-            const nextChapterData = findChapterData(nextChapter);
-            if (nextChapterData) {
-                console.log('Navigating to next chapter:', nextChapter);
-                navigate(`/truyen-tranh/${slug}/chuong-${images.chapter_name}`, {
-                    state: {
-                        chapterApiData: nextChapterData.chapter_api_data,
-                        currentChapter: nextChapter,
-                        totalChapters,
-                        chapters
-                    },
-                    replace: true
-                });
-            } else {
-                console.error('Next chapter data not found');
-            }
-        }
+    // const handleNextChapter = () => {
+
+    //     if (currentChapter < totalChapters) {
+    //         const nextChapter = currentChapter + 1;
+    //         const nextChapterData = findChapterData(nextChapter);
+    //         console.log(nextChapterData)
+    //         if (nextChapterData) {
+    //             console.log('Navigating to next chapter:', nextChapter);
+    //             navigate(`/truyen-tranh/${slug}/chuong-${chapter + 1}`, {
+    //                 state: {
+    //                     chapterApiData: nextChapterData.chapter_api_data,
+    //                     currentChapter: nextChapter,
+    //                     totalChapters,
+    //                     chapters
+    //                 },
+    //                 replace: true
+    //             });
+    //         } else {
+    //             console.error('Next chapter data not found');
+    //         }
+    //     }
+    // };formatformat
+
+    const handleNextChapter = () => {format
+        ()
+        const getStory = () => data.item.chapters[0].server_data?.slice()?.map((story) => story.chapter_name)
+        const format = Number(Math.round(chapter))
+        const findIndexChap = getStory().indexOf(String(format))
+        
+        console.log(getStory()[findIndexChap])
+        // console.log(getStory()[Number(Math.ceil(index))])
+        // const getChap = () => data.item.chapters[0].server_data?.slice()?.filter((story) => story.chapter_name === chapter)
+        // navigate(`/truyen-tranh/${slug}/chuong-${getStory()[Number(Math.ceil(index + 1))]}`);
+        // fetchImages(getChap()[0].chapter_api_data)
+        // navigate(`/truyen-tranh/${slug}/chuong-${getStory()[Number(Math.ceil(index))]}`, {
+        //             state: {
+        //                 chapterApiData: getChap()[0],
+        //                 currentChapter: index,
+        //                 totalChapters,
+        //                 chapters
+        //             },
+        //             replace: true
+        //         });
     };
 
     const handlePreviousChapter = () => {

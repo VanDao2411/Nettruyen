@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import chevron_left from '../../assets/chevron_left.png'
 import chevron_right from '../../assets/chevron_right.png'
+import { Link } from "react-router-dom";
 const StoryList = () => {
     const [stories, setStories] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,6 +42,12 @@ const StoryList = () => {
         }
     }
 
+    const handleItemClick = (story) => {
+        const clickedStories = JSON.parse(localStorage.getItem('clickedStories')) || [];
+        clickedStories.push(story);
+        localStorage.setItem('clickedStories', JSON.stringify(clickedStories));
+    };
+
     return (
         <div className="">
             <h2 className=" ml-10 pt-5 text-[28px] text-black font-semibold">
@@ -52,11 +59,12 @@ const StoryList = () => {
             >
                 {stories.map((story, index) => {
                     return (
-                        <div
+                        <Link to={`/truyen-tranh/${story.slug}`}
                             key={story._id}
                             className="relative mt-3 w-[180px] h-[230px] bg-gray-800 text-white rounded-lg overflow-hidden shadow-lg flex-shrink-0 "
                             onMouseEnter={() => handleCardHover(index)}
                             onMouseLeave={() => handleCardHover(null)}
+                            onClick={() => handleItemClick(story)}
                         >
                             <img
                                 className={` cursor-pointer ${hoveredCard === index
@@ -76,7 +84,7 @@ const StoryList = () => {
                                     <strong>Chapter</strong> {story.chaptersLatest[0]?.chapter_name}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
                 <button className="absolute left-[22rem] mt-[7rem] bg-slate-300 opacity-80 px-1 py-1 rounded-xl hover:scale-125 duration-500" onClick={scrollLeft}>

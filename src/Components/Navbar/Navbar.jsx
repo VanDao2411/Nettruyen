@@ -15,18 +15,18 @@ const Navbar = () => {
         <div className="w-40 h-20 hover:bg-white hover:text-purple-800 ">
             <li className='mt-4 ml-6 text-[15px] font-medium'>THEO DÕI</li>
         </div>
-        <div className="w-[70px] h-20 hover:bg-white hover:text-purple-800 ">
+        <Link to={'/history'} className="w-[70px] h-20 hover:bg-white hover:text-purple-800 ">
             <li className='mt-4 ml-3 text-[15px] font-medium' >LỊCH SỬ</li>
-        </div>
+        </Link>
         <div className="w-[80px] h-20 hover:bg-white hover:text-purple-800 ">
             <li className='mt-4 ml-3 text-[15px] font-medium'> THỂ LOẠI</li>
         </div>
         <div className="w-[90px] h-20 hover:bg-white hover:text-purple-800 ">
             <li className='mt-4 ml-3 text-[15px] font-medium'>XẾP HẠNG</li>
         </div>
-        <div className="w-[100px] h-20 hover:bg-white hover:text-purple-800 ">
+        <Link to='/tim-truyen' className="w-[100px] h-20 hover:bg-white hover:text-purple-800 ">
             <li className='mt-4 ml-3 text-[15px] font-medium'>TÌM TRUYỆN</li>
-        </div>
+        </Link>
         <div className="w-[74px] h-20 hover:bg-white hover:text-purple-800">
             <li className='mt-4 ml-2 text-[15px] font-medium'>CON GÁI</li>
         </div>

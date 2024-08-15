@@ -17,20 +17,21 @@ const Story_detail = () => {
     const [limit] = useState(2);
     const [limit_chap, setLimit_Chap] = useState(15)
     const navigate = useNavigate();
-    useEffect(() => {
+    useEffect( () => {
         // Gọi API để lấy dữ liệu
         fetch(`https://otruyenapi.com/v1/api/truyen-tranh/${slug}`)
-            .then(response => response.json())
+            .then(response =>  response.json())
             .then(data => setData(data.data))
             .catch(error => console.error('Error fetching data:', error));
+        
     }, []);
-
-
+    
     if (!data) {
         return <div>Loading...</div>;
     }
-     const handleChapterClick = (chapterApiData) => {
-        navigate(`/truyen-tranh/${slug}/chuong-${data.chapter_name}`, { state: { chapterApiData } });  // Thay vì history.push
+     const handleChapterClick = (chapter, chapterApiData) => {
+    
+        navigate(`/truyen-tranh/${slug}/chuong/${chapter}`, { state: { chapter, chapterApiData, data } });  // Thay vì history.push
     };
     return (
         <div className='bg-white shadow-xl w-[100rem] h-full ml-[19rem] mr-[10rem]">'>
@@ -111,8 +112,9 @@ const Story_detail = () => {
                             <li className='' key={index}>
                                 {/* <Link to={`/${chapter.og_url}/chuong-${chapter.chapter_name}`} className="">
                                 </Link> */}
+                               
                                 <button
-                                    onClick={() => handleChapterClick(chapter.chapter_api_data)}
+                                    onClick={() => handleChapterClick(chapter.chapter_name,chapter.chapter_api_data)}
                                     className="text-blue-500"
                                 >
                                     Chapter {chapter.chapter_name}

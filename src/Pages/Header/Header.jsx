@@ -10,6 +10,7 @@ import person from '../../assets/person.png'
 import arrow_drop from '../../assets/arrow_drop.png'
 import person_black from '../../assets/person_black.png'
 import dang_ky from '../../assets/dang-ky.png'
+import { logout } from '../../firebase';
 function Header() {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -58,7 +59,7 @@ function Header() {
                     <div className=" absolute cursor-pointer left-0 top-12 w-[20rem] h-[8rem]  bg-white border border-gray-200 rounded-md shadow-lg">
                         <div className=" h-[50%] flex gap-3  hover:bg-gray-200">
                             <img className='w-10 h-10 mt-5 ml-7' src={person_black} alt="" />
-                            <h3 className=' mt-5 text-black font-medium text-[15px]'>Đăng Nhập </h3>
+                            <h3 onClick={()=> {logout()}} className=' mt-5 text-black font-medium text-[15px]'>Đăng Nhập </h3>
                         </div>
                         <div className=" h-[50%] flex gap-3 hover:bg-gray-200">
                             <img className='w-10 h-10 mt-3 ml-7' src={dang_ky} alt="" />
